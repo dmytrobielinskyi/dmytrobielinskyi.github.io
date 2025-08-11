@@ -3,168 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DemanGames — Dozer Hole</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Dozer Hole by DemanGames</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: #0f0f0f;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
             color: white;
-            overflow-x: hidden;
-        }
-        header {
-            position: fixed;
-            width: 100%;
-            padding: 20px 50px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-        header h1 {
-            font-size: 24px;
-            letter-spacing: 2px;
-            color: #ffcc00;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #ffcc00;
-        }
-        section {
-            min-height: 100vh;
-            padding: 120px 50px 50px;
-            box-sizing: border-box;
-        }
-        .hero {
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            background: linear-gradient(135deg, #1c1c1c, #000);
-            animation: fadeIn 1s ease forwards;
+            min-height: 100vh;
+            overflow: hidden;
         }
-        .hero .icon { /* Изменено с img на .icon для специфичности */
-            max-width: 200px;
-            margin-bottom: 20px;
-            animation: float 4s ease-in-out infinite;
+        .card {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 1000px;
+            width: 90%;
+            animation: fadeIn 1s ease-out;
         }
-        .hero h2 {
+        .game-info {
+            flex: 1;
+            text-align: left;
+        }
+        .game-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .game-info h1 {
             font-size: 48px;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #ffcc00, #ff8800);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            line-height: 1.1;
         }
-        .hero p {
-            max-width: 600px;
-            font-size: 18px;
-            color: #ccc;
+        .game-info p {
+            font-size: 16px;
+            color: #e0e0e0;
+            max-width: 400px;
+            margin-bottom: 30px;
         }
         .button {
             display: inline-flex;
             align-items: center;
-            padding: 12px 24px;
-            background: #ffcc00;
-            color: black;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            color: #333;
             font-weight: bold;
-            border-radius: 30px;
-            margin-top: 30px;
+            border-radius: 50px;
             text-decoration: none;
-            transition: background 0.3s, transform 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
         }
         .button img {
             width: 24px;
             height: auto;
-            margin-right: 10px;
+            margin-right: 12px;
         }
         .button:hover {
-            background: #ffaa00;
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
-        .game-section {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            text-align: left;
+        .screenshot-gallery {
+            flex: 1;
+            position: relative;
+            height: 500px; /* Высота под скриншот */
+            min-width: 250px;
         }
-        .game-section img {
-            max-width: 400px;
+        .screenshot-gallery img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255,204,0,0.5);
-            animation: fadeInUp 1s ease forwards;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            animation: crossfade 12s linear infinite;
         }
-        .game-section div {
-            max-width: 500px;
-        }
+        /* Задержка анимации для каждого следующего скриншота */
+        .screenshot-gallery img:nth-child(2) { animation-delay: 4s; }
+        .screenshot-gallery img:nth-child(3) { animation-delay: 8s; }
+
         footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
             text-align: center;
-            padding: 20px;
-            background: #111;
-            color: #666;
+        }
+        footer a {
+            color: rgba(255,255,255,0.6);
             font-size: 14px;
+            text-decoration: none;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes crossfade {
+            0%, 25%, 100% { opacity: 0; }
+            8%, 17% { opacity: 1; }
+        }
+
+        @media (max-width: 800px) {
+            .card { flex-direction: column; text-align: center; }
+            .game-info { text-align: center; }
+            .screenshot-gallery { height: 400px; width: 80%; max-width: 250px; margin-top: 30px;}
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>DemanGames</h1>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#game">Dozer Hole</a>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <img src="logo.png" alt="DemanGames Logo" class="icon">
-        <h2>Welcome to DemanGames</h2>
-        <p>We create fun, addictive and stylish mobile games for everyone. Discover our latest hit — <b>Dozer Hole</b>!</p>
-        <a href="https://play.google.com/store/apps/details?id=com.demangames.dozerhole" target="_blank" class="button">
-            <img src="android-icon.png" alt="Android">
-            Get on Google Play
-        </a>
-    </section>
-
-    <section id="game">
-        <div class="game-section">
-            <img src="dozerhole-screenshot.png" alt="Dozer Hole Screenshot">
-            <div>
-                <h2>Dozer Hole</h2>
-                <p>Dive into an exciting world where you control a powerful bulldozer and swallow everything in your path with a mysterious hole! Compete, collect, and become the ultimate Dozer master.</p>
-                <a href="https://play.google.com/store/apps/details?id=com.demangames.dozerhole" target="_blank" class="button">
-                    <img src="android-icon.png" alt="Android">
-                    Play Now
-                </a>
-            </div>
+    <div class="card">
+        <div class="game-info">
+            <img src="game-icon.png" alt="Dozer Hole Icon" class="game-icon">
+            <h1>Dozer Hole</h1>
+            <p>Dive into an exciting world where you control a powerful bulldozer and swallow everything in your path with a mysterious hole!</p>
+            <a href="https://play.google.com/store/apps/details?id=com.demangames.dozerhole" target="_blank" class="button">
+                <img src="google-play-icon.png" alt="Google Play">
+                <span>Get on Google Play</span>
+            </a>
         </div>
-    </section>
-
+        <div class="screenshot-gallery">
+            <img src="screenshot-1.png" alt="Dozer Hole Gameplay Screenshot 1">
+            <img src="screenshot-2.png" alt="Dozer Hole Gameplay Screenshot 2">
+            <img src="screenshot-3.png" alt="Dozer Hole Gameplay Screenshot 3">
+        </div>
+    </div>
+    
     <footer>
-        © 2025 DemanGames. All rights reserved.
+        <a href="privacy-policy.html">Privacy Policy</a>
     </footer>
 
 </body>
