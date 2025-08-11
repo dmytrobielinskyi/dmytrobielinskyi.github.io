@@ -11,12 +11,16 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(45deg, #4facfe, #00f2fe);
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow: hidden;
+            padding: 40px 20px;
             box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .demangames-logo {
+            max-height: 50px; /* Увеличили логотип */
+            animation: fadeInDown 1s ease-out;
         }
         .card {
             display: flex;
@@ -28,171 +32,141 @@
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 1000px;
+            max-width: 1100px;
             width: 90%;
-            animation: fadeIn 1s ease-out;
-            position: relative; /* Для футера */
-        }
-        .header-logo {
-            position: absolute;
-            top: 20px;
-            left: 30px;
-            height: 30px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out .2s;
+            animation-fill-mode: forwards;
+            opacity: 0;
         }
         .game-info {
             flex: 1;
             text-align: left;
-            padding-top: 40px; /* Отступ для логотипа */
         }
         .game-title-container {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
         .game-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 18px;
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        .game-info h1 {
-            font-size: 42px;
-            font-weight: 800;
-            margin: 0;
-            line-height: 1.1;
+        .game-logo {
+            max-height: 60px; /* Место для логотипа игры */
         }
         .game-info p {
             font-size: 16px;
             color: #e0e0e0;
             max-width: 400px;
             margin-bottom: 30px;
+            line-height: 1.6;
         }
-        .button {
-            display: inline-flex;
-            align-items: center;
-            padding: 15px 30px;
-            background: linear-gradient(45deg, #ffd700, #ffb347);
-            color: #333;
-            font-weight: bold;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border: none;
+        .google-play-button {
+            display: inline-block;
+            transition: transform 0.3s ease;
         }
-        .button img {
-            width: 24px;
-            height: auto;
-            margin-right: 12px;
+        .google-play-button:hover {
+            transform: scale(1.05);
         }
-        .button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        .google-play-button img {
+            height: 60px; /* Задаем высоту для официального значка */
         }
-        .media-container {
-            flex: 1;
-            position: relative;
-            height: 500px;
-            min-width: 250px;
+
+        .media-column {
+            flex: 1.2; /* Делаем колонку с медиа чуть больше */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .video-container {
+            width: 100%;
             border-radius: 15px;
             overflow: hidden;
             background: #000;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
-        .media-container video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+        .video-container video {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: translate(-50%, -50%);
-            z-index: 1;
+            display: block;
         }
-        .screenshot-gallery {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .screenshot-container {
             width: 100%;
-            height: 100%;
-            z-index: 2;
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
         }
-        .screenshot-gallery img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            animation: crossfade 9s linear infinite; /* Ускорено: 3с на скриншот */
+        .screenshot-container img {
+            width: 31%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        .screenshot-gallery img:nth-child(2) { animation-delay: 3s; }
-        .screenshot-gallery img:nth-child(3) { animation-delay: 6s; }
 
         footer {
-            position: absolute;
-            bottom: 15px;
-            right: 30px;
-        }
-        footer a {
+            text-align: center;
+            margin-top: 30px;
             color: rgba(255,255,255,0.6);
             font-size: 14px;
+        }
+        footer a {
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes crossfade {
-            0% { opacity: 0; }
-            11% { opacity: 1; } /* Появился */
-            33% { opacity: 1; } /* Повисел */
-            44% { opacity: 0; } /* Исчез */
-            100% { opacity: 0; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 800px) {
-            body { padding: 20px 0; min-height: 0; }
-            .card { flex-direction: column; text-align: center; gap: 30px; }
-            .game-info { text-align: center; padding-top: 0; }
+        @media (max-width: 900px) {
+            .card { flex-direction: column; text-align: center; }
+            .game-info { text-align: center; }
             .game-title-container { justify-content: center;}
-            .media-container { height: 400px; width: 80%; max-width: 250px; }
-            .header-logo { display: none; }
-            footer { position: static; margin-top: 20px; }
+            .media-column { margin-top: 40px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <img src="demangames-logo.png" alt="DemanGames Logo" class="header-logo">
+    <header class="header">
+        <img src="demangames-logo.png" alt="DemanGames Logo" class="demangames-logo">
+    </header>
+
+    <main class="card">
         <div class="game-info">
             <div class="game-title-container">
                 <img src="game-icon.png" alt="Dozer Hole Icon" class="game-icon">
-                <h1>Dozer Hole</h1>
+                <img src="dozerhole-logo.png" alt="Dozer Hole Logo" class="game-logo">
             </div>
             
             <p>Dive into an exciting world where you control a powerful bulldozer and swallow everything in your path with a mysterious hole!</p>
-            <a href="https://play.google.com/store/apps/details?id=com.demangames.dozerhole" target="_blank" class="button">
-                <img src="google-play-icon.png" alt="Google Play">
-                <span>Get on Google Play</span>
+            
+            <a href="https://play.google.com/store/apps/details?id=com.demangames.dozerhole" target="_blank" class="google-play-button">
+                <img src="google-play-icon.png" alt="Get it on Google Play">
             </a>
         </div>
-        <div class="media-container">
-            <video src="dozerhole-video.mp4" autoplay loop muted playsinline></video>
-            <div class="screenshot-gallery">
+        <div class="media-column">
+            <div class="video-container">
+                <video src="dozerhole-video.mp4" autoplay loop muted playsinline></video>
+            </div>
+            <div class="screenshot-container">
                 <img src="screenshot-1.png" alt="Dozer Hole Gameplay Screenshot 1">
                 <img src="screenshot-2.png" alt="Dozer Hole Gameplay Screenshot 2">
                 <img src="screenshot-3.png" alt="Dozer Hole Gameplay Screenshot 3">
             </div>
         </div>
-        <footer>
-            <a href="privacy-policy.html">Privacy Policy</a>
-        </footer>
-    </div>
+    </main>
+
+    <footer>
+        <a href="privacy-policy.html">© 2025 DemanGames. All rights reserved. | Privacy Policy</a>
+    </footer>
 
 </body>
 </html>
