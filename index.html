@@ -14,23 +14,23 @@
             padding: 20px;
             box-sizing: border-box;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            align-items: center; /* Центрируем карточку по вертикали */
             justify-content: center;
             min-height: 100vh;
         }
         .header {
-            text-align: center;
-            margin-bottom: 30px;
-            /* Убран position:absolute для лучшего потока */
+            position: fixed; /* Фиксируем в углу */
+            top: 20px;
+            left: 30px;
+            z-index: 1000;
         }
         .demangames-logo {
-            max-height: 160px; /* ИЗМЕНЕНО: Логотип компании увеличен в 4 раза */
-            animation: fadeInDown 1s ease-out;
+            height: 40px;
         }
         .card {
             display: flex;
-            align-items: center;
+            /* ИЗМЕНЕНО: Выравнивание по верху */
+            align-items: flex-start; 
             gap: 50px;
             background: rgba(0, 0, 0, 0.3);
             padding: 40px;
@@ -38,19 +38,18 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            max-width: 1100px;
+            max-width: 1200px; /* Немного увеличим для нового макета */
             width: 90%;
-            animation: fadeInUp 1s ease-out .2s forwards;
-            opacity: 0;
+            animation: fadeIn 1s ease-out;
         }
         .game-info {
             flex: 1;
             text-align: left;
         }
         .game-icon {
-            width: 180px;  /* ИЗМЕНЕНО: Иконка игры увеличена в 2 раза */
-            height: 180px; /* ИЗМЕНЕНО: Иконка игры увеличена в 2 раза */
-            border-radius: 40px; /* Пропорционально увеличиваем скругление */
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
             margin-bottom: 20px;
         }
         .game-info h1 {
@@ -60,36 +59,43 @@
             line-height: 1.1;
         }
         .game-info p {
-            font-size: 18px; /* ИЗМЕНЕНО: Шрифт описания увеличен */
+            font-size: 16px;
             color: #e0e0e0;
             max-width: 400px;
             margin-bottom: 30px;
-            line-height: 1.7; /* Увеличена высота строки для читабельности */
+            line-height: 1.6;
         }
         .google-play-button {
             display: inline-block;
-            transition: transform 0.3s ease;
+            /* ИЗМЕНЕНО: Делаем кнопку белой */
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         .google-play-button:hover {
             transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
         .google-play-button img {
-            height: 60px;
+            height: 50px;
             width: auto;
+            display: block;
         }
         .media-column {
-            flex: 1.2;
+            flex: 1.5; /* Делаем правую колонку шире */
             display: flex;
-            flex-direction: column;
             gap: 20px;
+            align-items: flex-start;
         }
         .video-container {
-            width: 100%;
+            flex: 2; /* Видео занимает 2/3 места */
             border-radius: 15px;
             overflow: hidden;
             background: #000;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            aspect-ratio: 1080 / 1350;
+            aspect-ratio: 1080 / 1920; /* Вертикальные пропорции */
             position: relative;
         }
         .video-container video {
@@ -97,41 +103,55 @@
             height: 100%;
             object-fit: cover;
         }
-        .screenshot-container {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+        .screenshot-gallery {
+            flex: 1; /* Скриншот занимает 1/3 места */
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            aspect-ratio: 1080 / 1920; /* Те же пропорции */
         }
-        .screenshot-container img {
+        .screenshot-gallery img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            aspect-ratio: 9 / 16;
+            height: 100%;
             object-fit: cover;
+            opacity: 0;
+            animation: crossfade 9s linear infinite;
         }
+        .screenshot-gallery img:nth-child(1) { animation-delay: 0s; }
+        .screenshot-gallery img:nth-child(2) { animation-delay: 3s; }
+        .screenshot-gallery img:nth-child(3) { animation-delay: 6s; }
+
         footer {
-            text-align: center;
-            margin-top: 40px; /* Отступ от карточки */
+            position: absolute;
+            bottom: 10px;
             width: 100%;
+            text-align: center;
         }
         footer a {
             color: rgba(255,255,255,0.7);
             text-decoration: none;
             font-size: 14px;
         }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes crossfade {
+            0% { opacity: 0; }
+            11% { opacity: 1; }
+            33% { opacity: 1; }
+            44% { opacity: 0; }
+            100% { opacity: 0; }
         }
         @media (max-width: 900px) {
-            body { padding: 20px; justify-content: flex-start; }
+            body { padding: 20px; align-items: flex-start; }
             .card { flex-direction: column; text-align: center; }
-            .media-column { margin-top: 40px; width: 100%; }
+            .media-column { flex-direction: column; margin-top: 40px; width: 100%; }
+            .screenshot-gallery { max-height: 400px; }
         }
     </style>
 </head>
@@ -154,14 +174,14 @@
             <div class="video-container">
                 <video src="dozerhole-video.mp4" autoplay loop muted playsinline></video>
             </div>
-            <div class="screenshot-container">
+            <div class="screenshot-gallery">
                 <img src="screenshot-1.png" alt="Gameplay Screenshot 1">
                 <img src="screenshot-2.png" alt="Gameplay Screenshot 2">
                 <img src="screenshot-3.png" alt="Gameplay Screenshot 3">
             </div>
         </div>
     </main>
-
+    
     <footer>
         <a href="privacy-policy.html">© 2025 DemanGames. All rights reserved. | Privacy Policy</a>
     </footer>
