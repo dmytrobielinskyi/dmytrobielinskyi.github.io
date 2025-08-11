@@ -9,48 +9,48 @@
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            /* ИЗМЕНЕНО: Градиент теперь идет от темно-синего к светлому */
             background: linear-gradient(135deg, #0a192f, #1e90ff);
             color: white;
+            padding: 20px;
+            box-sizing: border-box;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow: hidden;
-            padding: 20px;
-            box-sizing: border-box;
         }
-        header {
-            position: fixed;
-            top: 20px;
-            left: 30px;
-            z-index: 1000;
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            /* Убран position:absolute для лучшего потока */
         }
         .demangames-logo {
-            height: 40px; /* Логотип компании */
+            max-height: 160px; /* ИЗМЕНЕНО: Логотип компании увеличен в 4 раза */
+            animation: fadeInDown 1s ease-out;
         }
         .card {
             display: flex;
             align-items: center;
             gap: 50px;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             padding: 40px;
             border-radius: 20px;
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            max-width: 950px;
+            max-width: 1100px;
             width: 90%;
-            animation: fadeIn 1s ease-out;
+            animation: fadeInUp 1s ease-out .2s forwards;
+            opacity: 0;
         }
         .game-info {
             flex: 1;
             text-align: left;
         }
         .game-icon {
-            width: 90px;
-            height: 90px;
-            border-radius: 20px;
+            width: 180px;  /* ИЗМЕНЕНО: Иконка игры увеличена в 2 раза */
+            height: 180px; /* ИЗМЕНЕНО: Иконка игры увеличена в 2 раза */
+            border-radius: 40px; /* Пропорционально увеличиваем скругление */
             margin-bottom: 20px;
         }
         .game-info h1 {
@@ -60,31 +60,28 @@
             line-height: 1.1;
         }
         .game-info p {
-            font-size: 16px;
+            font-size: 18px; /* ИЗМЕНЕНО: Шрифт описания увеличен */
             color: #e0e0e0;
             max-width: 400px;
             margin-bottom: 30px;
-            line-height: 1.6;
+            line-height: 1.7; /* Увеличена высота строки для читабельности */
         }
         .google-play-button {
             display: inline-block;
-            background-color: #ffffff; /* Белый цвет кнопки */
-            border-radius: 12px;
-            padding: 5px; /* Небольшой отступ внутри кнопки */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
         .google-play-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
         .google-play-button img {
-            height: 50px; /* Высота значка Google Play */
+            height: 60px;
             width: auto;
-            display: block;
         }
         .media-column {
             flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         .video-container {
             width: 100%;
@@ -92,7 +89,7 @@
             overflow: hidden;
             background: #000;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            aspect-ratio: 1080 / 1350; /* Пропорции вашего видео */
+            aspect-ratio: 1080 / 1350;
             position: relative;
         }
         .video-container video {
@@ -100,31 +97,47 @@
             height: 100%;
             object-fit: cover;
         }
+        .screenshot-container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .screenshot-container img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+        }
         footer {
-            position: absolute;
-            bottom: 15px;
-            right: 30px;
+            text-align: center;
+            margin-top: 40px; /* Отступ от карточки */
+            width: 100%;
         }
         footer a {
             color: rgba(255,255,255,0.7);
             text-decoration: none;
             font-size: 14px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        @media (max-width: 800px) {
-            body { padding: 20px; align-items: flex-start; }
-            .card { flex-direction: column; text-align: center; gap: 30px; }
-            .game-info { text-align: center; }
-            footer { position: static; margin-top: 30px; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 900px) {
+            body { padding: 20px; justify-content: flex-start; }
+            .card { flex-direction: column; text-align: center; }
+            .media-column { margin-top: 40px; width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <header class="header">
         <img src="demangames-logo.png" alt="DemanGames Logo" class="demangames-logo">
     </header>
 
@@ -132,7 +145,7 @@
         <div class="game-info">
             <img src="game-icon.png" alt="Dozer Hole Icon" class="game-icon">
             <h1>Dozer Hole</h1>
-            <p>Dive into an exciting world where you control a powerful bulldozer and swallow everything in your path!</p>
+            <p>Dive into an exciting world where you control a powerful bulldozer and swallow everything in your path with a mysterious hole!</p>
             <a href="https://play.google.com/store/apps/details?id=com.demangames.dozerhole" target="_blank" class="google-play-button">
                 <img src="google-play-icon.png" alt="Get it on Google Play">
             </a>
@@ -141,11 +154,17 @@
             <div class="video-container">
                 <video src="dozerhole-video.mp4" autoplay loop muted playsinline></video>
             </div>
+            <div class="screenshot-container">
+                <img src="screenshot-1.png" alt="Gameplay Screenshot 1">
+                <img src="screenshot-2.png" alt="Gameplay Screenshot 2">
+                <img src="screenshot-3.png" alt="Gameplay Screenshot 3">
+            </div>
         </div>
-        <footer>
-            <a href="privacy-policy.html">Privacy Policy</a>
-        </footer>
     </main>
+
+    <footer>
+        <a href="privacy-policy.html">© 2025 DemanGames. All rights reserved. | Privacy Policy</a>
+    </footer>
 
 </body>
 </html>
