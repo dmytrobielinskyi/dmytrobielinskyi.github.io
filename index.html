@@ -19,7 +19,7 @@
             margin-bottom: 30px;
         }
         .demangames-logo {
-            max-height: 50px; /* Увеличили логотип */
+            max-height: 50px;
             animation: fadeInDown 1s ease-out;
         }
         .card {
@@ -38,6 +38,7 @@
             animation: fadeInUp 1s ease-out .2s;
             animation-fill-mode: forwards;
             opacity: 0;
+            position: relative;
         }
         .game-info {
             flex: 1;
@@ -56,7 +57,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         .game-logo {
-            max-height: 60px; /* Место для логотипа игры */
+            max-height: 60px;
         }
         .game-info p {
             font-size: 16px;
@@ -68,16 +69,32 @@
         .google-play-button {
             display: inline-block;
             transition: transform 0.3s ease;
+            margin-bottom: 15px; /* Отступ между кнопками */
         }
         .google-play-button:hover {
             transform: scale(1.05);
         }
         .google-play-button img {
-            height: 60px; /* Задаем высоту для официального значка */
+            height: 60px;
         }
-
+        .download-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #ffffff; /* Белый цвет */
+            color: #333;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .download-button:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
         .media-column {
-            flex: 1.2; /* Делаем колонку с медиа чуть больше */
+            flex: 1.2;
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -104,7 +121,6 @@
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-
         footer {
             text-align: center;
             margin-top: 30px;
@@ -126,6 +142,7 @@
         }
 
         @media (max-width: 900px) {
+            body { padding: 20px 0; }
             .card { flex-direction: column; text-align: center; }
             .game-info { text-align: center; }
             .game-title-container { justify-content: center;}
@@ -150,6 +167,10 @@
             
             <a href="https://play.google.com/store/apps/details?id=com.demangames.dozerhole" target="_blank" class="google-play-button">
                 <img src="google-play-icon.png" alt="Get it on Google Play">
+            </a>
+            <br>
+            <a href="https://play.google.com/store/apps/details?id=com.demangames.dozerhole" target="_blank" class="download-button">
+                Download Now
             </a>
         </div>
         <div class="media-column">
