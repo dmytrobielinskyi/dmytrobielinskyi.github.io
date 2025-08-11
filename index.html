@@ -16,6 +16,7 @@
             justify-content: center;
             min-height: 100vh;
             overflow: hidden;
+            box-sizing: border-box;
         }
         .card {
             display: flex;
@@ -30,22 +31,35 @@
             max-width: 1000px;
             width: 90%;
             animation: fadeIn 1s ease-out;
+            position: relative; /* Для футера */
+        }
+        .header-logo {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            height: 30px;
         }
         .game-info {
             flex: 1;
             text-align: left;
+            padding-top: 40px; /* Отступ для логотипа */
+        }
+        .game-title-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         .game-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 22px;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         .game-info h1 {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 800;
-            margin: 0 0 10px 0;
+            margin: 0;
             line-height: 1.1;
         }
         .game-info p {
@@ -76,11 +90,33 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
-        .screenshot-gallery {
+        .media-container {
             flex: 1;
             position: relative;
-            height: 500px; /* Высота под скриншот */
+            height: 500px;
             min-width: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .media-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        .screenshot-gallery {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
         }
         .screenshot-gallery img {
             position: absolute;
@@ -89,20 +125,16 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             opacity: 0;
-            animation: crossfade 12s linear infinite;
+            animation: crossfade 9s linear infinite; /* Ускорено: 3с на скриншот */
         }
-        /* Задержка анимации для каждого следующего скриншота */
-        .screenshot-gallery img:nth-child(2) { animation-delay: 4s; }
-        .screenshot-gallery img:nth-child(3) { animation-delay: 8s; }
+        .screenshot-gallery img:nth-child(2) { animation-delay: 3s; }
+        .screenshot-gallery img:nth-child(3) { animation-delay: 6s; }
 
         footer {
             position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
+            bottom: 15px;
+            right: 30px;
         }
         footer a {
             color: rgba(255,255,255,0.6);
@@ -115,39 +147,52 @@
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes crossfade {
-            0%, 25%, 100% { opacity: 0; }
-            8%, 17% { opacity: 1; }
+            0% { opacity: 0; }
+            11% { opacity: 1; } /* Появился */
+            33% { opacity: 1; } /* Повисел */
+            44% { opacity: 0; } /* Исчез */
+            100% { opacity: 0; }
         }
 
         @media (max-width: 800px) {
-            .card { flex-direction: column; text-align: center; }
-            .game-info { text-align: center; }
-            .screenshot-gallery { height: 400px; width: 80%; max-width: 250px; margin-top: 30px;}
+            body { padding: 20px 0; min-height: 0; }
+            .card { flex-direction: column; text-align: center; gap: 30px; }
+            .game-info { text-align: center; padding-top: 0; }
+            .game-title-container { justify-content: center;}
+            .media-container { height: 400px; width: 80%; max-width: 250px; }
+            .header-logo { display: none; }
+            footer { position: static; margin-top: 20px; }
         }
     </style>
 </head>
 <body>
 
     <div class="card">
+        <img src="demangames-logo.png" alt="DemanGames Logo" class="header-logo">
         <div class="game-info">
-            <img src="game-icon.png" alt="Dozer Hole Icon" class="game-icon">
-            <h1>Dozer Hole</h1>
+            <div class="game-title-container">
+                <img src="game-icon.png" alt="Dozer Hole Icon" class="game-icon">
+                <h1>Dozer Hole</h1>
+            </div>
+            
             <p>Dive into an exciting world where you control a powerful bulldozer and swallow everything in your path with a mysterious hole!</p>
             <a href="https://play.google.com/store/apps/details?id=com.demangames.dozerhole" target="_blank" class="button">
                 <img src="google-play-icon.png" alt="Google Play">
                 <span>Get on Google Play</span>
             </a>
         </div>
-        <div class="screenshot-gallery">
-            <img src="screenshot-1.png" alt="Dozer Hole Gameplay Screenshot 1">
-            <img src="screenshot-2.png" alt="Dozer Hole Gameplay Screenshot 2">
-            <img src="screenshot-3.png" alt="Dozer Hole Gameplay Screenshot 3">
+        <div class="media-container">
+            <video src="dozerhole-video.mp4" autoplay loop muted playsinline></video>
+            <div class="screenshot-gallery">
+                <img src="screenshot-1.png" alt="Dozer Hole Gameplay Screenshot 1">
+                <img src="screenshot-2.png" alt="Dozer Hole Gameplay Screenshot 2">
+                <img src="screenshot-3.png" alt="Dozer Hole Gameplay Screenshot 3">
+            </div>
         </div>
+        <footer>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </footer>
     </div>
-    
-    <footer>
-        <a href="privacy-policy.html">Privacy Policy</a>
-    </footer>
 
 </body>
 </html>
